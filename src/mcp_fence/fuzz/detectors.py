@@ -68,7 +68,7 @@ def inspect_fuzz_result(result: FuzzResult) -> None:
             payload_value = v
 
     location = _location_for(case)
-    is_error = result.response_ok is False or "isError" in text.lower()[:20]
+    is_error = result.response_ok is False or "iserror" in text.lower()[:64]
 
     if case.payload_category == "command-injection":
         if _detect_marker(text):
