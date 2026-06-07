@@ -74,3 +74,25 @@ def test_prompt_injection_reflection():
     r = _make("prompt-injection", {"text": payload}, payload + " more text")
     inspect_fuzz_result(r)
     assert any(f.rule_id == "MCPG028" for f in r.findings)
+
+def test_ssrf_not_validated_triggers_27():
+    r = _make(
+        "ssrf",
+        {"url": "http://169.254.169.254/latest/meta-data/"},
+        "fetched http://169.254.169.254/latest/meta-data/ ok",
+    )
+    inspect_fuzz_result(r)
+    assert any(f.rule_id == "MCPG027" for f in r.findings)
+
+
+def test_oversize_timeout_triggers_29():
+    case = FuzzCase(
+        case_id="x",
+        tool_name="read_file",
+        payload_category="oversize-input",
+        intent="t",
+        arguments={"path": "A" * 100000},
+    )
+    r = FuzzResult(case=case, response_ok=False, response_text="", error="timeout")
+    inspect_fuzz_result(r)
+    assert any(f.rule_id == "MCPG029" for f in r.findings)
