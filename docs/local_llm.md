@@ -40,7 +40,7 @@ Override the endpoint and model with `--llm-endpoint` and `--llm-model`.
   `--llm-timeout` higher (default 15 s) if your first request is cold.
 - `llama3.1:8b-instruct-q5_K_M` — fine alternative.
 
-The default model name is read from `MCP_GUARD_LLM_MODEL` and falls
+The default model name is read from `MCP_FENCE_LLM_MODEL` (or the legacy `MCP_GUARD_LLM_MODEL`) and falls
 back to `qwen3:8b`.
 
 ## Example

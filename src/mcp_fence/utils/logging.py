@@ -12,7 +12,7 @@ _LOGGER_NAME: Final = "mcp_fence"
 
 
 def configure(debug: bool = False) -> None:
-    level = logging.DEBUG if debug or os.environ.get("MCP_GUARD_DEBUG") else logging.WARNING
+    level = logging.DEBUG if debug or (os.environ.get("MCP_FENCE_DEBUG") or os.environ.get("MCP_GUARD_DEBUG")) else logging.WARNING
     logger = logging.getLogger(_LOGGER_NAME)
     logger.setLevel(level)
     if logger.handlers:
