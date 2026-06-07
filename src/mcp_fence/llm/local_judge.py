@@ -29,8 +29,8 @@ class LLMUnavailable(RuntimeError):
     pass
 
 
-_DEFAULT_OLLAMA = os.environ.get("MCP_GUARD_OLLAMA_URL", "http://localhost:11434")
-_DEFAULT_MODEL = os.environ.get("MCP_GUARD_LLM_MODEL", "qwen3:8b")
+_DEFAULT_OLLAMA = os.environ.get("MCP_FENCE_OLLAMA_URL", os.environ.get("MCP_GUARD_OLLAMA_URL", "http://localhost:11434"))
+_DEFAULT_MODEL = os.environ.get("MCP_FENCE_LLM_MODEL", os.environ.get("MCP_GUARD_LLM_MODEL", "qwen3:8b"))
 
 
 @dataclass
