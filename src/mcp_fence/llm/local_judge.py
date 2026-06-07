@@ -6,7 +6,7 @@ to a local Ollama instance or any OpenAI-compatible local server (e.g.
 ``vllm`` on ``http://localhost:8000/v1``).
 
 The judge does not replace deterministic detection: it boosts confidence
-and may add a low-severity ``MCPGCustom`` finding when it sees something
+and may add a low-severity ``MCPG010`` finding when it sees something
 suspicious. Failures degrade silently.
 """
 
