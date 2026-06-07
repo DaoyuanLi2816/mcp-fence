@@ -500,6 +500,7 @@ DANGEROUS_START_PATTERNS = [
     (r"\brm\s+-[rRf]{1,2}\b", "MCPG004"),
     (r"\bmkfs\b", "MCPG004"),
     (r"\bchmod\s+777\b", "MCPG004"),
+    (r"\bdd\s+if=", "MCPG004"),
     (r"~/?\.ssh\b", "MCPG005"),
     (r"~/?\.aws\b", "MCPG005"),
     (r"~/?\.gnupg\b", "MCPG005"),
