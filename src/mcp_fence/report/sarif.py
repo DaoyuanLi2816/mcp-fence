@@ -27,7 +27,7 @@ def _used_rules(findings: list[Finding]) -> list[dict[str, Any]]:
             "name": spec["title"],
             "shortDescription": {"text": spec["title"]},
             "fullDescription": {"text": spec["rationale"]},
-            "helpUri": "https://github.com/mcp-fence/mcp-fence/blob/main/docs/rule_catalog.md",
+            "helpUri": "https://github.com/DaoyuanLi2816/mcp-fence/blob/main/docs/rule_catalog.md",
             "defaultConfiguration": {"level": f.severity.sarif_level},
             "properties": {
                 "category": spec["category"],
@@ -88,7 +88,7 @@ def render_sarif(result: ScanResult) -> str:
                     "driver": {
                         "name": "mcp-fence",
                         "version": result.tool_version,
-                        "informationUri": "https://github.com/mcp-fence/mcp-fence",
+                        "informationUri": "https://github.com/DaoyuanLi2816/mcp-fence",
                         "rules": rules,
                     }
                 },
