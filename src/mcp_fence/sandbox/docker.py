@@ -145,12 +145,13 @@ def _compose_fragment(
     lines.append(f"    pids_limit: {profile.pids_limit}")
     lines.append(f"    mem_limit: {profile.memory_limit}")
     lines.append(f"    cpus: '{profile.cpu_limit}'")
-    lines.append("    cap_drop:")
     if profile.drop_caps:
+        lines.append("    cap_drop:")
         lines.append("      - ALL")
     for cap in profile.additional_capabilities:
         lines.append(f"    cap_add:\n      - {cap}")
-    lines.append("    security_opt:")
+    if profile.no_new_privileges or profile.extra_security_opts:
+        lines.append("    security_opt:")
     if profile.no_new_privileges:
         lines.append("      - no-new-privileges:true")
     for opt in profile.extra_security_opts:
