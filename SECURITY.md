@@ -27,9 +27,7 @@ is not intended for unauthorized testing of third-party services.
 ### Safety guarantees
 
 - **Non-destructive.** Fuzzing payloads are harmless; the marker payload
-  used to detect command injection is `echo MCP_GUARD_MARKER` (or an
-  equivalent that creates/reads a clearly-named file under the OS temp
-  directory). No `rm`, `mv`, `chmod`, or destructive system calls are
+  used to detect command injection is `echo MCPG_FUZZ_MARKER_8f2a`. No `rm`, `mv`, `chmod`, or destructive system calls are
   ever emitted.
 - **Local-first.** No code, configuration, or scan result is ever uploaded.
   The optional LLM judge talks to a *local* endpoint only (Ollama,
