@@ -36,8 +36,8 @@ Override the endpoint and model with `--llm-endpoint` and `--llm-model`.
 ## Recommended models for an RTX 4080 (16 GB VRAM)
 
 - `qwen3:8b` — good default. Fits comfortably; <2 s judgements.
-- `qwen3:14b` — better judgements; uses most of the VRAM. Set
-  `--llm-timeout` higher (default 15 s) if your first request is cold.
+- `qwen3:14b` — better judgements; uses most of the VRAM. The first
+  (cold) request can be slow; the judge uses a fixed 15 s timeout.
 - `llama3.1:8b-instruct-q5_K_M` — fine alternative.
 
 The default model name is read from `MCP_FENCE_LLM_MODEL` (or the legacy `MCP_GUARD_LLM_MODEL`) and falls
@@ -52,7 +52,7 @@ ollama serve            # usually started by the desktop client
 
 # Run a scan with the judge enabled.
 mcp-fence scan examples/vulnerable_metadata_server/mcp.json \
-    --inspect --llm-judge ollama --model qwen3:8b
+    --inspect --llm-judge ollama --llm-model qwen3:8b
 ```
 
 For a local vLLM server:
