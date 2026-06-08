@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><style>
+  :root{--bg:#0b1220;--card:#fff;--ink:#0f172a;--muted:#64748b;--line:#7c8aa5;
+        --in:#6366f1;--scan:#0ea5e9;--fuzz:#a855f7;--judge:#10b981;--find:#ef4444;--rep:#f59e0b;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1160px;height:680px}
+  body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+       background:radial-gradient(1300px 780px at 20% -12%,#1c2740 0%,var(--bg) 58%);
+       color:#e2e8f0;padding:34px 44px 26px}
+  h1{font-size:29px;font-weight:800}.h1a{color:#38bdf8}
+  .sub{color:#94a3b8;font-size:14.5px;margin-top:5px;margin-bottom:20px}
+  .band{display:flex;align-items:center;gap:14px;justify-content:center}
+  .lbl{writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:800;
+       letter-spacing:2px;text-transform:uppercase;color:#64748b;flex:0 0 auto}
+  .card{flex:1;background:var(--card);color:var(--ink);border-radius:13px;padding:12px 15px;
+        box-shadow:0 12px 28px rgba(2,6,23,.5),0 2px 5px rgba(2,6,23,.35);border-top:4px solid var(--in)}
+  .card .t{font-size:14.5px;font-weight:700}
+  .card .d{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.5}
+  .mono{font-family:"Cascadia Code",Consolas,monospace}
+  .a{display:flex;align-items:center;justify-content:center;color:var(--line)}
+  .a.v{height:24px}.a.v svg{width:24px;height:24px}
+  .group{flex:1;border:1.5px dashed #3b4a66;border-radius:18px;padding:18px 16px 14px;position:relative;background:rgba(148,163,184,.05)}
+  .group>.gt{position:absolute;top:-11px;left:18px;background:#0ea5e9;color:#04222f;font-size:11px;
+             font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:999px}
+  .lanes{display:flex;gap:14px}
+  .lane{flex:1;background:#fff;color:var(--ink);border-radius:12px;padding:12px 14px;
+        box-shadow:0 6px 16px rgba(2,6,23,.4);border-top:4px solid var(--scan)}
+  .lane.f{border-top-color:var(--fuzz)} .lane.j{border-top-color:var(--judge)}
+  .lane .lt{font-size:14px;font-weight:700}
+  .lane .opt{font-size:10px;font-weight:700;color:var(--judge);text-transform:uppercase;letter-spacing:1px}
+  .lane .ld{font-size:11.5px;color:var(--muted);margin-top:4px;line-height:1.55}
+  .out .card.find{border-top-color:var(--find)} .out .card.rep{border-top-color:var(--rep)}
+  .sev{display:flex;gap:6px;margin-top:6px;font-size:10.5px;font-weight:700}
+  .sev span{padding:2px 7px;border-radius:999px}
+  .sc{background:#fee2e2;color:#991b1b}.sh{background:#ffedd5;color:#9a3412}.sm{background:#fef9c3;color:#854d0e}
+</style></head>
+<body>
+  <h1>mcp&#8209;fence <span class="h1a">&mdash; security scanner &amp; fuzzer for MCP servers</span></h1>
+  <div class="sub">Inventories an MCP server, hunts vulnerabilities statically and by safe fuzzing in a Docker sandbox, then reports.</div>
+
+  <div class="band">
+    <div class="lbl">target</div>
+    <div class="card" style="border-top-color:var(--in)"><div class="t">MCP config</div><div class="d mono">mcp.json</div></div>
+    <div class="card" style="border-top-color:var(--in)"><div class="t">Server code</div><div class="d mono">server.py</div></div>
+    <div class="card" style="border-top-color:var(--in)"><div class="t">Inventory</div><div class="d">list tools &amp; schemas over stdio</div></div>
+  </div>
+
+  <div class="a v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15M6 13l6 6 6-6"/></svg></div>
+
+  <div class="band">
+    <div class="group"><span class="gt">analysis</span>
+      <div class="lanes">
+        <div class="lane"><div class="lt">Static scanners</div><div class="ld">config &middot; metadata &middot; code &middot; secrets &middot; risk rules</div></div>
+        <div class="lane f"><div class="lt">Dynamic fuzz</div><div class="ld">generator &rarr; runner &rarr; detectors<br>safe payloads, <b>Docker sandbox</b></div></div>
+        <div class="lane j"><div class="lt">LLM judge <span class="opt">&middot; optional</span></div><div class="ld">local Ollama / vLLM<br>boosts confidence</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="a v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15M6 13l6 6 6-6"/></svg></div>
+
+  <div class="band out">
+    <div class="lbl">output</div>
+    <div class="card find"><div class="t">Findings</div>
+      <div class="d">rule catalog <span class="mono">MCPGxxx</span> &middot; evidence &middot; location</div>
+      <div class="sev"><span class="sc">critical</span><span class="sh">high</span><span class="sm">medium</span></div></div>
+    <div class="card rep"><div class="t">Reports</div><div class="d">SARIF (code&#8209;scanning) &middot; HTML &middot; text</div></div>
+  </div>
+</body></html>
