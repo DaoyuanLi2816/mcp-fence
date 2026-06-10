@@ -1,9 +1,15 @@
-# mcp-fence
+<p align="center">
+  <img src="https://raw.githubusercontent.com/DaoyuanLi2816/mcp-fence/main/docs/banner.svg" alt="mcp-fence — security scanner and fuzzer for Model Context Protocol servers: static + live scanning, schema-aware fuzzing, Docker sandbox, SARIF/HTML/JSON reports." width="880">
+</p>
+
+<div align="center">
 
 [![CI](https://github.com/DaoyuanLi2816/mcp-fence/actions/workflows/ci.yml/badge.svg)](https://github.com/DaoyuanLi2816/mcp-fence/actions/workflows/ci.yml)
 [![PyPI](https://img.shields.io/pypi/v/mcp-fence.svg)](https://pypi.org/project/mcp-fence/)
 [![Python](https://img.shields.io/badge/python-3.11%2B-blue)](https://www.python.org)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
+
+</div>
 
 > Local-first security scanner, MCP protocol inspector, dynamic fuzzer,
 > Docker sandbox, and report generator for **Model Context Protocol**

@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 250" role="img" aria-label="mcp-fence — security scanner, fuzzer and sandbox for Model Context Protocol servers">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="55%" stop-color="#4c0519"/>
+      <stop offset="100%" stop-color="#9f1239"/>
+    </linearGradient>
+    <clipPath id="bgclip">
+      <rect x="0" y="0" width="880" height="250" rx="16"/>
+    </clipPath>
+  </defs>
+
+  <rect x="0" y="0" width="880" height="250" rx="16" fill="url(#bg)"/>
+  <g clip-path="url(#bgclip)">
+    <circle cx="790" cy="0" r="190" fill="#fb7185" opacity="0.07"/>
+    <circle cx="350" cy="265" r="150" fill="#f472b6" opacity="0.05"/>
+  </g>
+
+  <!-- ===== left column: brand ===== -->
+  <text x="40" y="84" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="44" font-weight="800" fill="#ffffff">mcp-fence</text>
+  <rect x="42" y="94" width="64" height="3" rx="1.5" fill="#fb7185" opacity="0.9"/>
+  <text x="40" y="124" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="15" fill="#cbd5e1">Security scanner &amp; fuzzer for MCP servers</text>
+
+  <!-- mode chips -->
+  <g font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" text-anchor="middle">
+    <rect x="40" y="140" width="48" height="24" rx="12" fill="#34d399" fill-opacity="0.12" stroke="#34d399" stroke-opacity="0.65"/>
+    <text x="64" y="156" fill="#6ee7b7">scan</text>
+    <rect x="96" y="140" width="48" height="24" rx="12" fill="#60a5fa" fill-opacity="0.12" stroke="#60a5fa" stroke-opacity="0.65"/>
+    <text x="120" y="156" fill="#93c5fd">fuzz</text>
+    <rect x="152" y="140" width="68" height="24" rx="12" fill="#fbbf24" fill-opacity="0.12" stroke="#fbbf24" stroke-opacity="0.65"/>
+    <text x="186" y="156" fill="#fde68a">sandbox</text>
+  </g>
+
+  <!-- context pill -->
+  <rect x="40" y="178" width="204" height="28" rx="14" fill="#fb7185" fill-opacity="0.10" stroke="#fb7185" stroke-opacity="0.55"/>
+  <text x="54" y="196" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" fill="#fda4af">SARIF &#183; HTML &#183; JSON reports</text>
+
+  <!-- pip install pill -->
+  <rect x="40" y="214" width="190" height="26" rx="13" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.18"/>
+  <text x="54" y="231" font-family="ui-monospace, SFMono-Regular, Consolas, 'Courier New', monospace" font-size="12.5" fill="#e2e8f0">$ pip install mcp-fence</text>
+
+  <!-- ===== card 1: static + live scan ===== -->
+  <g>
+    <rect x="350" y="30" width="156" height="190" rx="12" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.13"/>
+    <circle cx="380" cy="62" r="16" fill="#38bdf8" fill-opacity="0.14" stroke="#38bdf8" stroke-opacity="0.55" stroke-width="1.4"/>
+    <g stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" fill="none">
+      <circle cx="378" cy="59" r="6"/>
+      <line x1="382.5" y1="63.5" x2="388" y2="69"/>
+    </g>
+    <g font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+      <text x="366" y="102" font-size="14" font-weight="700" fill="#f1f5f9">Static +</text>
+      <text x="366" y="120" font-size="14" font-weight="700" fill="#f1f5f9">live scan</text>
+      <text x="366" y="142" font-size="11.5" fill="#94a3b8">poisoned tools,</text>
+      <text x="366" y="158" font-size="11.5" fill="#94a3b8">secrets, schema gaps</text>
+      <text x="366" y="180" font-size="10.5" fill="#fcd34d" fill-opacity="0.9">non-destructive,</text>
+      <text x="366" y="195" font-size="10.5" fill="#fcd34d" fill-opacity="0.9">local-first</text>
+    </g>
+  </g>
+
+  <!-- ===== card 2: schema-aware fuzzing ===== -->
+  <g>
+    <rect x="520" y="30" width="156" height="190" rx="12" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.13"/>
+    <circle cx="550" cy="62" r="16" fill="#34d399" fill-opacity="0.14" stroke="#34d399" stroke-opacity="0.55" stroke-width="1.4"/>
+    <g stroke="#34d399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M 552 52 L 546 62 L 551 62 L 547 72"/>
+    </g>
+    <g font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+      <text x="536" y="102" font-size="14" font-weight="700" fill="#f1f5f9">Schema-aware</text>
+      <text x="536" y="120" font-size="14" font-weight="700" fill="#f1f5f9">fuzzing</text>
+      <text x="536" y="142" font-size="11.5" fill="#94a3b8">injection, SSRF, path</text>
+      <text x="536" y="158" font-size="11.5" fill="#94a3b8">traversal payloads</text>
+      <text x="536" y="180" font-size="10.5" fill="#fcd34d" fill-opacity="0.9">safe by default &#8212;</text>
+      <text x="536" y="195" font-size="10.5" fill="#fcd34d" fill-opacity="0.9">opt-in unsafe modes</text>
+    </g>
+  </g>
+
+  <!-- ===== card 3: sandbox & reports ===== -->
+  <g>
+    <rect x="690" y="30" width="156" height="190" rx="12" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.13"/>
+    <circle cx="720" cy="62" r="16" fill="#a78bfa" fill-opacity="0.14" stroke="#a78bfa" stroke-opacity="0.55" stroke-width="1.4"/>
+    <g stroke="#a78bfa" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M 720 51 L 728 55 L 728 62 L 720 72 L 712 62 L 712 55 Z"/>
+    </g>
+    <g font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+      <text x="706" y="102" font-size="14" font-weight="700" fill="#f1f5f9">Sandbox &amp;</text>
+      <text x="706" y="120" font-size="14" font-weight="700" fill="#f1f5f9">reports</text>
+      <text x="706" y="142" font-size="11.5" fill="#94a3b8">Docker sandbox &#183; SARIF</text>
+      <text x="706" y="158" font-size="11.5" fill="#94a3b8">for code scanning</text>
+      <text x="706" y="180" font-size="10.5" fill="#fcd34d" fill-opacity="0.9">strict &#183; readonly &#183;</text>
+      <text x="706" y="195" font-size="10.5" fill="#fcd34d" fill-opacity="0.9">network-deny</text>
+    </g>
+  </g>
+</svg>
