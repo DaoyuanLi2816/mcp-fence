@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.1.1] - 2026-06-10
+
+### Changed
+- README masthead: SVG hero banner (also rendered on the PyPI project page)
+  and centered badges; architecture diagram switched to an absolute URL so it
+  renders on PyPI.
+- Releases now publish to PyPI via trusted publishing (`release.yml`) on
+  GitHub release. No code changes.
+
 ## [0.1.0] - 2026-05-16
 
 ### Added
