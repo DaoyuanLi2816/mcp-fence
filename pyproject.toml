@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mcp-fence"
-version = "0.1.0"
+version = "0.1.1"
 description = "Local-first security scanner, MCP protocol inspector, dynamic fuzzer, sandbox runner, and report generator for Model Context Protocol servers."
 readme = "README.md"
 requires-python = ">=3.11"

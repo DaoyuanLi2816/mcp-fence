@@ -15,7 +15,7 @@
 > Docker sandbox, and report generator for **Model Context Protocol**
 > servers.
 
-![mcp-fence architecture](docs/architecture.png)
+![mcp-fence architecture](https://raw.githubusercontent.com/DaoyuanLi2816/mcp-fence/main/docs/architecture.png)
 
 `mcp-fence` is a developer tool. Point it at your `mcp.json` (or any
 running MCP server you wrote) and it will:
