@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/daoyuanli2816-mcp-fence-badge.png)](https://mseep.ai/app/daoyuanli2816-mcp-fence)
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/DaoyuanLi2816/mcp-fence/main/docs/banner.svg" alt="mcp-fence — security scanner and fuzzer for Model Context Protocol servers: static + live scanning, schema-aware fuzzing, Docker sandbox, SARIF/HTML/JSON reports." width="880">
 </p>
