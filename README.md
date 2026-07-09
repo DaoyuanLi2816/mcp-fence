@@ -65,20 +65,20 @@ Requires Python 3.11+.
 mcp-fence init-example ./mcp-fence-examples
 
 # 2. Static scan the intentionally poisoned metadata server.
-mcp-fence scan examples/vulnerable_metadata_server/mcp.json
+mcp-fence scan mcp-fence-examples/vulnerable_metadata_server/mcp.json
 
 # 3. Live-inspect the safe baseline.
-mcp-fence inspect examples/safe_server/mcp.json
+mcp-fence inspect mcp-fence-examples/safe_server/mcp.json
 
 # 4. Fuzz the arbitrary-file-read server.
-mcp-fence fuzz examples/vulnerable_filesystem_server/mcp.json
+mcp-fence fuzz mcp-fence-examples/vulnerable_filesystem_server/mcp.json
 
 # 5. Generate a `docker run` command that sandboxes any of the above.
-mcp-fence sandbox examples/vulnerable_filesystem_server/mcp.json \
+mcp-fence sandbox mcp-fence-examples/vulnerable_filesystem_server/mcp.json \
     --profile strict --dry-run
 
 # 6. Turn a saved JSON result into an offline HTML report.
-mcp-fence scan examples/vulnerable_metadata_server/mcp.json \
+mcp-fence scan mcp-fence-examples/vulnerable_metadata_server/mcp.json \
     --format json --output /tmp/scan.json
 mcp-fence report /tmp/scan.json --format html --output /tmp/scan.html
 ```
@@ -86,7 +86,7 @@ mcp-fence report /tmp/scan.json --format html --output /tmp/scan.html
 ## Example output
 
 ```
-mcp-fence 0.1.0 :: scan :: target=examples/vulnerable_metadata_server/mcp.json
+mcp-fence 0.1.2 :: scan :: target=mcp-fence-examples/vulnerable_metadata_server/mcp.json
   summary: total=1 score=7/100 verdict=FAIL
   by_severity: high=1
   by_category: secrets=1
@@ -166,7 +166,7 @@ optional judge:
 
 ```bash
 ollama pull qwen3:8b
-mcp-fence scan examples/vulnerable_metadata_server/mcp.json \
+mcp-fence scan mcp-fence-examples/vulnerable_metadata_server/mcp.json \
     --inspect --llm-judge ollama --llm-model qwen3:8b
 ```
 
@@ -193,10 +193,10 @@ SARIF to GitHub's code scanning dashboard.
 ## Five most useful commands
 
 ```bash
-mcp-fence scan examples/vulnerable_metadata_server/mcp.json
-mcp-fence inspect examples/safe_server/mcp.json
-mcp-fence fuzz examples/vulnerable_filesystem_server/mcp.json
-mcp-fence sandbox examples/vulnerable_shell_server/mcp.json --profile strict --dry-run
+mcp-fence scan mcp-fence-examples/vulnerable_metadata_server/mcp.json
+mcp-fence inspect mcp-fence-examples/safe_server/mcp.json
+mcp-fence fuzz mcp-fence-examples/vulnerable_filesystem_server/mcp.json
+mcp-fence sandbox mcp-fence-examples/vulnerable_shell_server/mcp.json --profile strict --dry-run
 mcp-fence report /tmp/scan.json --format html --output /tmp/scan.html
 ```
 
