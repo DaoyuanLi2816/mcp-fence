@@ -30,6 +30,7 @@ CAT_SCHEMA = "schema"
 CAT_DYNAMIC = "dynamic-behavior"
 CAT_SANDBOX = "sandbox"
 CAT_PROTOCOL = "protocol"
+CAT_CODE = "source-code"
 
 
 _RULES: list[RuleSpec] = [
@@ -372,6 +373,49 @@ _RULES: list[RuleSpec] = [
         "category": CAT_PROTOCOL,
         "rationale": "Tool or initialize call exceeded the configured timeout.",
         "recommendation": "Tune the call timeout or investigate the server hang.",
+    },
+    # E. Source-code scan (regex, best-effort). These describe patterns found
+    # in the server's own .py files, distinct from the tool-metadata (A) and
+    # dynamic (D) families that happen to concern the same primitives.
+    {
+        "id": "MCPG036",
+        "title": "Source invokes a shell",
+        "severity": Severity.MEDIUM,
+        "category": CAT_CODE,
+        "rationale": "`shell=True`, `os.system`, or `os.popen` in the server source runs a shell.",
+        "recommendation": "Use argv-form subprocess without a shell; never concatenate untrusted input.",
+    },
+    {
+        "id": "MCPG037",
+        "title": "Use of eval()/exec() in source",
+        "severity": Severity.HIGH,
+        "category": CAT_CODE,
+        "rationale": "`eval()`/`exec()` on any attacker-influenced string is an RCE primitive.",
+        "recommendation": "Remove dynamic evaluation; parse structured input explicitly.",
+    },
+    {
+        "id": "MCPG038",
+        "title": "Unsafe deserialization in source",
+        "severity": Severity.HIGH,
+        "category": CAT_CODE,
+        "rationale": "`pickle.loads` / `yaml.load` without SafeLoader can execute arbitrary code on load.",
+        "recommendation": "Use `yaml.safe_load` and a safe serialization format instead of pickle.",
+    },
+    {
+        "id": "MCPG039",
+        "title": "TLS verification disabled in source",
+        "severity": Severity.MEDIUM,
+        "category": CAT_CODE,
+        "rationale": "`verify=False` disables certificate validation and enables MITM.",
+        "recommendation": "Leave TLS verification on; pin or supply a CA bundle if needed.",
+    },
+    {
+        "id": "MCPG040",
+        "title": "Hard-coded secret in source",
+        "severity": Severity.HIGH,
+        "category": CAT_CODE,
+        "rationale": "A secret-shaped literal (API key, token, private key) is committed in the source.",
+        "recommendation": "Move secrets to environment/secret storage; rotate the exposed value.",
     },
 ]
 
