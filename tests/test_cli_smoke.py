@@ -12,7 +12,7 @@ from typer.testing import CliRunner
 from mcp_fence.cli import app
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-EXAMPLES = PROJECT_ROOT / "examples"
+EXAMPLES = PROJECT_ROOT / "src" / "mcp_fence" / "examples"
 
 
 @pytest.fixture

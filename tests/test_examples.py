@@ -15,7 +15,7 @@ from mcp_fence.mcp.inventory import ServerSpec, inspect_target
 from mcp_fence.scanner.config_scan import scan_config_file
 from mcp_fence.scanner.metadata_scan import scan_inventory
 
-EXAMPLES = Path(__file__).resolve().parent.parent / "examples"
+EXAMPLES = Path(__file__).resolve().parent.parent / "src" / "mcp_fence" / "examples"
 SAFE = EXAMPLES / "safe_server" / "server.py"
 VULN_FS = EXAMPLES / "vulnerable_filesystem_server" / "server.py"
 VULN_SHELL = EXAMPLES / "vulnerable_shell_server" / "server.py"

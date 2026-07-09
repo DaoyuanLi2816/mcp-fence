@@ -432,9 +432,11 @@ def init_example(
     overwrite: bool = typer.Option(False, "--overwrite", help="Overwrite an existing directory."),
 ) -> None:
     """Copy the bundled example servers into a working directory."""
-    pkg_examples = Path(__file__).resolve().parent.parent.parent / "examples"
+    # Examples ship inside the package (src/mcp_fence/examples), so this
+    # resolves both for `pip install mcp-fence` and an editable checkout.
+    pkg_examples = Path(__file__).resolve().parent / "examples"
     if not pkg_examples.exists():
-        # Falls back to the cwd's examples/ during local development.
+        # Fall back to a repo-root examples/ for unusual dev layouts.
         pkg_examples = Path.cwd() / "examples"
     if not pkg_examples.exists():
         typer.echo("error: bundled examples not found.", err=True)

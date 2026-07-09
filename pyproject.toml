@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mcp-fence"
-version = "0.1.1"
+version = "0.1.2"
 description = "Local-first security scanner, MCP protocol inspector, dynamic fuzzer, sandbox runner, and report generator for Model Context Protocol servers."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -57,12 +57,19 @@ where = ["src"]
 include = ["mcp_fence*"]
 
 [tool.setuptools.package-data]
-mcp_fence = ["report/templates/*.html", "report/templates/*.css"]
+mcp_fence = [
+    "report/templates/*.html",
+    "report/templates/*.css",
+    "examples/**/*.py",
+    "examples/**/*.json",
+    "examples/**/*.txt",
+    "examples/**/*.md",
+]
 
 [tool.ruff]
 line-length = 100
 target-version = "py311"
-extend-exclude = ["examples/vulnerable_*"]
+extend-exclude = ["**/examples/vulnerable_*"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "UP", "B", "C4", "SIM", "RUF"]
@@ -76,7 +83,7 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "tests/*" = ["E501", "B011"]
-"examples/*" = ["E501", "F401", "F841"]
+"**/examples/*" = ["E501", "F401", "F841"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
