@@ -36,9 +36,12 @@ jobs:
       - name: pytest
         run: pytest -q
 
+      - name: materialise bundled examples
+        run: mcp-fence init-example ./ex
+
       - name: scan vulnerable_metadata_server (json)
         run: |
-          mcp-fence scan examples/vulnerable_metadata_server/mcp.json --format json --output /tmp/mcp_fence_scan.json || true
+          mcp-fence scan ex/vulnerable_metadata_server/mcp.json --format json --output /tmp/mcp_fence_scan.json || true
           test -s /tmp/mcp_fence_scan.json
 
       - name: render html artifact
@@ -48,7 +51,7 @@ jobs:
 
       - name: sandbox dry-run
         run: |
-          mcp-fence sandbox examples/vulnerable_filesystem_server/mcp.json --profile strict --dry-run
+          mcp-fence sandbox ex/vulnerable_filesystem_server/mcp.json --profile strict --dry-run
 
       - name: upload reports
         if: always()

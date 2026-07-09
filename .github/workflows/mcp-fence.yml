@@ -29,25 +29,43 @@ jobs:
       - name: install mcp-fence
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -e ".[dev]"
+          python -m pip install mcp-fence
 
       - name: scan configs and emit SARIF
+        shell: python
         run: |
-          mkdir -p .mcp-fence
-          shopt -s globstar nullglob
-          declare -a targets=( **/mcp.json **/.mcp.json **/claude_desktop_config.json )
-          if [ ${#targets[@]} -eq 0 ]; then
-            echo "no mcp.json-shaped files found; emitting empty SARIF"
-            mcp-fence scan . --format sarif --output .mcp-fence/results.sarif || true
-            exit 0
-          fi
-          # Combine the first finding-rich target into SARIF.
-          for t in "${targets[@]}"; do
-            mcp-fence scan "$t" --format sarif --output ".mcp-fence/$(echo "$t" | tr '/' '_').sarif" || true
-          done
+          import glob, pathlib
+          from mcp_fence import __version__
+          from mcp_fence.models import ScanResult
+          from mcp_fence.report import render_sarif
+          from mcp_fence.scanner import scan_config_file
+
+          patterns = ("**/mcp.json", "**/.mcp.json", "**/claude_desktop_config.json")
+          seen, targets = set(), []
+          for pat in patterns:
+              for p in glob.glob(pat, recursive=True):
+                  rp = str(pathlib.Path(p))
+                  if rp not in seen:
+                      seen.add(rp)
+                      targets.append(rp)
+
+          # One ScanResult -> one SARIF run -> one upload category. Uploading
+          # several SARIF files under a single category is rejected by GitHub.
+          result = ScanResult(target=".", kind="scan", tool_version=__version__)
+          for t in sorted(targets):
+              try:
+                  result.findings.extend(scan_config_file(pathlib.Path(t)))
+              except Exception as e:  # noqa: BLE001 - never fail the gate on one bad file
+                  print(f"skipping {t}: {e}")
+          if not targets:
+              print("no mcp.json-shaped files found; emitting empty SARIF")
+
+          pathlib.Path(".mcp-fence").mkdir(exist_ok=True)
+          pathlib.Path(".mcp-fence/results.sarif").write_text(render_sarif(result), encoding="utf-8")
+          print(f"scanned {len(targets)} config(s), {len(result.findings)} finding(s)")
 
       - name: upload SARIF
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: .mcp-fence
+          sarif_file: .mcp-fence/results.sarif
           category: mcp-fence
