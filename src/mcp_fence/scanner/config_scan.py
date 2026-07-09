@@ -6,7 +6,7 @@ from __future__ import annotations
 import re
 import shlex
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 
 from ..constants import DANGEROUS_START_PATTERNS
 from ..models import Finding, Location
@@ -17,19 +17,6 @@ from .secrets import env_value_looks_secret, find_secrets, redact
 _SHELL_BINARIES = {"sh", "bash", "zsh", "dash", "fish", "pwsh", "powershell", "cmd", "cmd.exe"}
 _SHELL_EXEC_FLAGS = {"-c", "/c", "/C"}
 _BROAD_DIRECTORY_TOKENS = {"/", "~", "$HOME", "**", "*"}
-
-
-def _iter_command_strings(command: Any, args: Any) -> Iterable[str]:
-    if isinstance(command, str):
-        yield command
-    elif isinstance(command, list):
-        for c in command:
-            if isinstance(c, str):
-                yield c
-    if isinstance(args, list):
-        for c in args:
-            if isinstance(c, str):
-                yield c
 
 
 def _full_command_line(command: Any, args: Any) -> str:
@@ -121,26 +108,9 @@ def _scan_command(command: Any, args: Any, location: Location) -> list[Finding]:
                 )
             )
 
-    # Direct env reference to docker socket / sensitive locations.
-    for s in _iter_command_strings(command, args):
-        if "/var/run/docker.sock" in s:
-            findings.append(
-                make_finding(
-                    "MCPG033",
-                    description="Docker socket referenced in start command.",
-                    evidence=s,
-                    location=location,
-                )
-            )
-        if "--privileged" in s:
-            findings.append(
-                make_finding(
-                    "MCPG034",
-                    description="`--privileged` flag in start command.",
-                    evidence=s,
-                    location=location,
-                )
-            )
+    # (docker.sock / --privileged are already covered by DANGEROUS_START_PATTERNS
+    # above, which scans the full command_line including args — re-checking them
+    # here produced duplicate MCPG033/MCPG034 findings.)
 
     return findings
 

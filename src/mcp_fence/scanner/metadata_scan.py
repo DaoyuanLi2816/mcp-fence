@@ -414,8 +414,12 @@ def _schema_findings(tool: ToolSpec, location: Location) -> list[Finding]:
             )
         )
 
-    # Recursive walk for nested string params with risky names.
+    # Recursive walk for nested string params with risky names. Top-level
+    # properties (path length 1) are already handled by the direct loop above;
+    # re-flagging them here produced duplicate MCPG021 findings.
     for path, sub in walk_properties(schema):
+        if len(path) < 2:
+            continue
         leaf = path[-1].lower()
         if HIGH_RISK_PARAM_NAMES.get(leaf) and primitive_for(sub) == "string":
             max_len, pattern, enum = get_string_constraints(sub)
