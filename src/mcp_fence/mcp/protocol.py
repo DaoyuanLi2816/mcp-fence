@@ -9,9 +9,11 @@ from __future__ import annotations
 import itertools
 from typing import Any
 
+from .. import __version__
+
 PROTOCOL_VERSION = "2024-11-05"
 CLIENT_NAME = "mcp-fence"
-CLIENT_VERSION = "0.1.0"
+CLIENT_VERSION = __version__
 
 
 def initialize_params(client_name: str = CLIENT_NAME, client_version: str = CLIENT_VERSION) -> dict[str, Any]:

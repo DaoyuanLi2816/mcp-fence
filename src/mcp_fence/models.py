@@ -10,6 +10,13 @@ from typing import Any
 from pydantic import BaseModel, ConfigDict, Field
 
 
+def _pkg_version() -> str:
+    """Package version, imported lazily to avoid an import cycle with __init__."""
+    from . import __version__
+
+    return __version__
+
+
 class Severity(str, Enum):
     INFO = "info"
     LOW = "low"
@@ -145,7 +152,7 @@ class ScanResult(BaseModel):
     model_config = ConfigDict(extra="ignore")
     schema_version: str = "1.0"
     tool: str = "mcp-fence"
-    tool_version: str = "0.1.0"
+    tool_version: str = Field(default_factory=lambda: _pkg_version())
     target: str
     kind: str = "scan"  # scan | inspect | fuzz
     started_at: str = Field(
