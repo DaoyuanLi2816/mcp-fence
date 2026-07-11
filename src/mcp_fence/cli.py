@@ -111,7 +111,7 @@ def _try_load_existing_scan(path: Path) -> ScanResult:
 def scan(
     target: str = typer.Argument(
         ...,
-        help="Path to mcp.json, a directory of source, or `--command \"…\"` form.",
+        help="Path to mcp.json, a directory of source, or use `--command \"…\"`.",
     ),
     command: str | None = typer.Option(
         None,
