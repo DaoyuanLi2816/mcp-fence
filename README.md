@@ -93,7 +93,7 @@ mcp-fence 0.1.2 :: scan :: target=mcp-fence-examples/vulnerable_metadata_server/
 
 # Findings
   SEV   RULE     TITLE                    CATEGORY  WHERE                    DETAIL
-  HIGH  MCPG006  Plaintext secret in env  secrets   param=OPENAI_API_KEY     Environment variable OPENAI_API_KEY appears to be a plaintext secret.
+  HIGH  MCPG006  Plaintext secret in env  secrets   param=OPENAI_API_KEY     Environment variable `OPENAI_API_KEY` appears to contain a plaintext secret.
 ```
 
 ## Supported transports
@@ -119,6 +119,9 @@ Full catalog in [`docs/rule_catalog.md`](docs/rule_catalog.md). Highlights:
 - **Schema risks** — unbounded strings, missing `additionalProperties`,
   high-risk param names (`command`, `path`, `url`, `webhook`, …)
   without pattern/enum/maxLength.
+- **Source code** — shell invocation (`shell=True`, `os.system`), use of
+  `eval`/`exec`, unsafe deserialization (`pickle`, unsafe `yaml.load`),
+  disabled TLS verification, hard-coded secrets.
 - **Dynamic** — path traversal hitting a planted fake secret, command
   injection marker echoed back, SSRF accepting metadata IPs, malformed
   input passing schema validation, sensitive patterns in tool output.
@@ -176,8 +179,12 @@ scan completes either way. See [`docs/local_llm.md`](docs/local_llm.md).
 ## GitHub Action
 
 Drop [`.github/workflows/mcp-fence.yml`](.github/workflows/mcp-fence.yml)
-into any repo with an `mcp.json`. It scans every config and uploads
-SARIF to GitHub's code scanning dashboard.
+into any repo with an `mcp.json`. It discovers every `mcp.json`,
+`.mcp.json`, and `claude_desktop_config.json` in the repo, merges their
+findings into a single SARIF run, and uploads it to GitHub's code
+scanning dashboard.
+
+For a single known config path, a minimal equivalent looks like:
 
 ```yaml
 - name: install mcp-fence
