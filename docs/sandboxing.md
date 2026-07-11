@@ -60,11 +60,11 @@ All profiles set:
 
 ```bash
 # Print the docker command without executing it.
-mcp-fence sandbox examples/vulnerable_filesystem_server/mcp.json \
+mcp-fence sandbox mcp-fence-examples/vulnerable_filesystem_server/mcp.json \
     --profile strict --dry-run
 
 # Actually run it (requires docker installed).
-mcp-fence sandbox examples/vulnerable_filesystem_server/mcp.json \
+mcp-fence sandbox mcp-fence-examples/vulnerable_filesystem_server/mcp.json \
     --profile strict --execute
 ```
 

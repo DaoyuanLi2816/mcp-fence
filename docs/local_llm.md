@@ -51,14 +51,14 @@ ollama pull qwen3:8b
 ollama serve            # usually started by the desktop client
 
 # Run a scan with the judge enabled.
-mcp-fence scan examples/vulnerable_metadata_server/mcp.json \
+mcp-fence scan mcp-fence-examples/vulnerable_metadata_server/mcp.json \
     --inspect --llm-judge ollama --llm-model qwen3:8b
 ```
 
 For a local vLLM server:
 
 ```bash
-mcp-fence scan examples/vulnerable_metadata_server/mcp.json \
+mcp-fence scan mcp-fence-examples/vulnerable_metadata_server/mcp.json \
     --inspect \
     --llm-judge openai-compatible \
     --llm-endpoint http://localhost:8000/v1 \
