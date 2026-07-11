@@ -194,3 +194,40 @@ Legend: **C** = critical, **H** = high, **M** = medium, **L** = low,
 - **Detect:** `--privileged` flag in start command or config.
 - **Fix:** Drop all capabilities by default and set
   `no-new-privileges`.
+
+## F. Source-code scan (`source-code`)
+
+Regex-based, best-effort scanning of the server's own `.py` files, run when
+`mcp-fence scan` is pointed at a project directory. Comments and string
+literals are blanked out before matching (byte offsets preserved so
+reported line numbers stay correct), so a docstring that merely mentions
+`eval(` does not fire. An AST-based version is planned for v0.2 (see
+[`docs/roadmap.md`](roadmap.md)).
+
+### `MCPG036` — Source invokes a shell  (M)
+- **Detect:** `subprocess.*(..., shell=True, ...)`, `os.system(`, or
+  `os.popen(` in the source.
+- **Fix:** Use argv-form subprocess without a shell; never concatenate
+  untrusted input into a command string.
+
+### `MCPG037` — Use of `eval()`/`exec()` in source  (H)
+- **Detect:** A bare `eval(`/`exec(` call. A negative lookbehind excludes
+  method calls such as `model.eval()` or `df.eval()`.
+- **Fix:** Remove dynamic evaluation; parse structured input explicitly.
+
+### `MCPG038` — Unsafe deserialization in source  (H)
+- **Detect:** `pickle.loads(`/`pickle.load(`, or `yaml.load(...)` without
+  `SafeLoader`.
+- **Fix:** Use `yaml.safe_load` and a safe serialization format instead of
+  pickle.
+
+### `MCPG039` — TLS verification disabled in source  (M)
+- **Detect:** `verify=False` (e.g. on a `requests` call).
+- **Fix:** Leave TLS verification on; pin or supply a CA bundle if needed.
+
+### `MCPG040` — Hard-coded secret in source  (H)
+- **Detect:** The same secret-pattern matcher used by `MCPG006`, run
+  against the raw (unmasked) source text so a literal inside a string still
+  counts.
+- **Fix:** Move secrets to environment/secret storage and rotate the
+  exposed value.

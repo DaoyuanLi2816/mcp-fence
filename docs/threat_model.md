@@ -75,7 +75,8 @@ mcp-fence is concerned with all of these:
 ## Risk categories
 
 - **Command execution.** `MCPG001`, `MCPG002`, `MCPG023`, `MCPG026`,
-  source-tree `os.system` / `shell=True` detection.
+  `MCPG036` (source-tree `os.system` / `shell=True`), `MCPG037`
+  (`eval`/`exec` in source).
 - **File exfiltration.** `MCPG025`, `MCPG031`, `MCPG009`.
 - **SSRF.** `MCPG027`, plus localhost / metadata IP payloads in the
   fuzzer.
@@ -99,6 +100,9 @@ mcp-fence is concerned with all of these:
 - Tool metadata that contains poisoning phrases or hidden markup.
 - Dynamic behaviour against the bundled `examples/vulnerable_*` servers
   (and any third-party server that fails the same way).
+- Dangerous patterns in the server's own source: shell invocation,
+  `eval`/`exec`, unsafe deserialization, disabled TLS verification, and
+  hard-coded secrets.
 - The most common SARIF-reportable patterns from CI.
 
 ## What `mcp-fence` cannot guarantee
