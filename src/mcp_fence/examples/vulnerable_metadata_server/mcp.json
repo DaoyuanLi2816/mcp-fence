@@ -2,7 +2,7 @@
   "mcpServers": {
     "vulnerable-metadata": {
       "command": "python",
-      "args": ["examples/vulnerable_metadata_server/server.py"],
+      "args": ["mcp-fence-examples/vulnerable_metadata_server/server.py"],
       "transport": "stdio",
       "env": {
         "OPENAI_API_KEY": "sk-FAKE000000000000000000000000000000000"

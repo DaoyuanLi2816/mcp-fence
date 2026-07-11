@@ -14,11 +14,12 @@ mcp-fence's tests and tutorials.
 ## Run
 
 ```bash
-python examples/safe_server/server.py
+python mcp-fence-examples/safe_server/server.py
 ```
 
 The server speaks newline-delimited JSON-RPC on stdio. `mcp-fence inspect
-examples/safe_server/mcp.json` should report two tools and zero findings.
+mcp-fence-examples/safe_server/mcp.json` should report two tools and zero
+findings.
 
 ## Why is it safe?
 

@@ -2,7 +2,7 @@
   "mcpServers": {
     "safe-example": {
       "command": "python",
-      "args": ["examples/safe_server/server.py"],
+      "args": ["mcp-fence-examples/safe_server/server.py"],
       "transport": "stdio"
     }
   }

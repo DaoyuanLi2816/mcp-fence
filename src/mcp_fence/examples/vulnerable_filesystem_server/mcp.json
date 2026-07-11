@@ -2,7 +2,7 @@
   "mcpServers": {
     "vulnerable-fs": {
       "command": "python",
-      "args": ["examples/vulnerable_filesystem_server/server.py"],
+      "args": ["mcp-fence-examples/vulnerable_filesystem_server/server.py"],
       "transport": "stdio",
       "allowedDirectories": ["/"]
     }
